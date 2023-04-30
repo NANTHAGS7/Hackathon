@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stripe Example</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <form>
+    <label for="card-element">Credit or debit card</label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+    <button id="submit">Submit Payment</button>
+    <div id="error"></div>
+  </form>
+
+  <script>
+    // Set your publishable key
+    var stripe = Stripe('pk_test_51N2BrwSEKG4vuy5hIvfmAfjapR0KOwTtxr4qeCJxKfXTlEV1WsLVtfvoIlPsRpkgDRui2SxUt4mV26tXN04LINVX00MKOd8pVk');
+    var elements = stripe.elements();
+
+    // Create an instance of the card Element
+    var card = elements.create('card');
+
+    // Add an instance of the card Element into the `card-element` <div>
+    card.mount('#card-element');
+
+    // Handle form submission
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Disable the submit button to prevent repeated clicks
+      document.getElementById('submit').disabled = true;
+
+      // Create a token from the card information
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          var errorElement = document.getElementById('error');
+          errorElement.textContent = result.error.message;
+
+          // Enable the submit button to allow resubmission
+          document.getElementById('submit').disabled = false;
+        } else {
+          // Send the token to your server
+          stripeTokenHandler(result.token);
+        }
+      });
+    });
+
+    // Submit the form with the token ID
+    function stripeTokenHandler(token) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form = document.querySelector('form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripeToken');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+
+      // Submit the form
+      form.submit();
+    }
+  </script>
+</body>
+</html>

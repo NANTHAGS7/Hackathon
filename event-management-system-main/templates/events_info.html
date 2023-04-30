@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Information</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body style="background-color: #DEFCF9">
+    <div
+      style="
+        background-color: #080d3a;;
+        height: 7rem;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      "
+      class="text-dark"
+    >
+      <h1 style="text-align: center; color:#FFD662">
+        About Events &#128526;
+      </h1>
+    </div>
+    <br />
+    <br />
+    {% for event in events %}
+    <div
+      style="
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        border-radius: 30%;
+        color: #D81159;
+        border-color: #182848;
+        border-width: 5px;
+      "
+    >
+      <div class="card mb-3" style="width: 60rem;background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);">
+        <div
+          style="align-items: center; display: flex; justify-content: center;color: #FFD662;"
+          class="h1 card-header bg-transparent"
+        >
+          {{event[3]}}
+        </div>
+        <div class="card-body">
+          <h5
+            class="card-title"
+            style="align-items: center; display: flex; justify-content: center;color:#EEA47f"
+          >
+            <b style="color: #FFD662;" ">{{event[3]}}</b>&nbsp;is a flagship {{event[7]}} event of College
+            of engineering Pune
+          </h5>
+        </div>
+        <div
+          class="card-footer bg-transparent"
+          style="align-items: center; display: flex; justify-content: center;color: #EEA47f;"
+        >
+        <b style="color: #FFD662;" ">Venue:</b>&nbsp; {{event[8]}}
+        </div>
+        <div
+        class="card-footer bg-transparent"
+        style="align-items: center; display: flex; justify-content: center;color: #EEA47f;"
+      >
+      <b style="color: #FFD662;" ">Date:</b>&nbsp; {{event[6]}}
+      </div>
+        <div
+          class="card-footer bg-transparent"
+          style="align-items: center; display: flex; justify-content: center;color: #EEA47f;"
+        >
+        <b style="color: #FFD662;" ">Registration fee:</b>&nbsp; &#8377;{{event[4]}}
+        </div>
+        <div
+          class="card-footer bg-transparent"
+          style="align-items: center; display: flex; justify-content: center;color: #EEA47f;"
+        >
+        <b style="color: #FFD662;" ">Current Participants:</b>&nbsp; {{event[9]}}
+        </div>
+        <div
+          class="card-footer bg-transparent"
+          style="align-items: center; display: flex; justify-content: center;color: #EEA47f;"
+        >
+        <b style="color: #FFD662;" ">Max Participants:</b>&nbsp; {{event[5]}}
+        </div>
+      </div>
+    </div>
+    <br />
+    {% endfor %}
+  </body>
+</html>

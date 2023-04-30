@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Types</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f1faee;">
+    <div style="background-color:#004e89;height: 70px;align-items: center; display: flex; justify-content: center;"
+        class="text-light">
+        <h1>Event Administrator</h1>
+    </div>
+    <div style="padding-top: 50px; margin: 30px;">
+        <div style=" align-items: center; display: flex; justify-content: center;">
+            <h1>Event Types</h1>
+        </div>
+        <table class="table">
+            <thead class="thead-dark bg-dark text-light">
+                <tr>
+                    <th scope="col">Type ID</th>
+                    <th scope="col">Event Type</th>
+                    <th scope="col">Total participants</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in eventTypes %}
+                <tr>
+                    <th scope="row">{{event[0]}}</th>
+                    <td>{{event[1]}}</td>
+                    <td>{{event[2]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style=" align-items: center; display: flex; justify-content: center;">
+            <h1>Events</h1>
+        </div>
+        <table class="table">
+            <thead class="thead-dark bg-dark text-light">
+                <tr>
+                    <th scope="col">Event ID</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Total participants</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for eve in events %}
+                <tr>
+                    <th scope="row">{{eve[0]}}</th>
+                    <td>{{eve[1]}}</td>
+                    <td>{{eve[2]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row" style="align-items: center;display: flex; justify-content: center;">
+            <div class="col-md-3" > 
+                <button id="addbtn" type="button" class="mb-5 btn btn-primary btn-lg" >
+                    + Add new Event
+                </button>
+            </div>
+            <div class="col-md-6"id="deldiv" >
+                <button id="delbtn" type="button" class="mb-5 btn btn-danger btn-lg">
+                    Delete Event
+                </button>
+            </div>
+            <div class="col-md-9" style="display:contents">
+                <a  href="/participants" style="width:20% ;" id="pbtn" class=" mb-5 btn btn-success btn-lg">
+                    Show Participants info 
+                </a>
+                <a  href="/logistics" style="width:20% ;" id="pbtn" class=" mb-5 btn btn-success btn-lg">
+                    Analaysists Information 
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-dark text-dark "
+            style="align-items:center; display: flex; justify-content: center;display: none;background-color: #f1faee;height:20%;border-radius:10px;"
+            id="delevent">
+            <form method="post" style="width:45vw;min-height:20vw;">
+                <div class="form-group rounded" style="text-align:center;">
+                    <label style="margin-top:4%;margin-bottom:5%;;font-style:Trebuchet MS;color:antiquewhite" class="h2"
+                        for="inlineFormCustomSelect">Delete Event </label>
+                    <select name="EventId" class="form-control w-100 border border-dark">
+                        <option selected>Select Event to Delete</option>
+                        {% for event in events %}
+                        <option value="{{event[0]}}">{{event[1]}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="margin-top:3%;align-items: center;display:flex;justify-content:center;">
+                    <button style="width:20%;margin-top:2%;margin-bottom:5%;align-items: center;display: flex; justify-content: center;font-weight:bolder;"
+                        type="submit" class="btn btn-primary border border-dark">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row" style="display: none;" id="eventname">
+            <div class="col-md-4">
+            </div>
+            <div class="border border-dark">
+                <div style="border-radius:12px;position:relative;" class="w3-container ">
+                    <h2 style="font-weight:bold;text-align:center;"> Event Addition form </h2>
+                </div>
+                <form class="" method="post">
+                    <div class="row bg-dark text-light">
+                        <div class="px-5 bg-dark">
+                            <form method="post" style="margin-top:100px;">
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="h4" for="inlineFormCustomSelect">Add new Event</label>
+                                            <input name="newEvent" type="text" class="form-control border border-dark"
+                                                id="eventname" aria-describedby="eventname"
+                                                placeholder="Enter Event Name">
+                                            <br />
+                                            <div class="form-group rounded">
+                                                <label class="h4" for="inlineFormCustomSelect">Event Type</label>
+                                                <select name="EventType" class="form-control w-100 border border-dark"
+                                                    id="EventType">
+                                                    <option selected>Select Event Type</option>
+                                                    {% for type in types %}
+                                                    <option value={{type[0]}}>{{type[1]}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <div class="form-group">
+                                                <label class="h4" for="inlineFormCustomSelect">Registration Fee</label>
+                                                <input name="Fee" type="number" class="form-control border border-dark"
+                                                    id="Fee" aria-describedby="Fee"
+                                                    placeholder="Enter registration fee">
+                                                <br />
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="h4" for="inlineFormCustomSelect">Max participants</label>
+                                            <input name="maxP" type="number" class="form-control border border-dark"
+                                                id="maxparticipants" aria-describedby="maxparticipants"
+                                                placeholder="Enter maximum participants">
+                                            <br />
+                                            <div class="form-group rounded">
+                                                <label class="h4" for="inlineFormCustomSelect">Event Location</label>
+                                                <select name="EventLocation"
+                                                    class="form-control w-100 border border-dark" id="EventLocation">
+                                                    <option selected>Select Location</option>
+                                                    {% for location in locations %}
+                                                    <option value={{location[0]}}>{{location[1]}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <label class="h4" for="inlineFormCustomSelect">Enter
+                                                date(YYYY-MM-DD)</label>
+                                            <input name="Date" type="text" class="form-control border border-dark"
+                                                id="date" aria-describedby="date" placeholder="Enter Date">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="">
+                                        <button style="font-size:larger;left:47%;position:relative" type="submit"
+                                            class="mt-4 mb-3 btn btn-primary" onclick="login()">Submit</button>
+                                    </div>
+                            </form>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const targetDiv = document.getElementById("eventname")
+        const bdiv = document.getElementById("delevent")
+        const btn = document.getElementById("addbtn")
+        btn.onclick = function () {
+            if (targetDiv.style.display == "none" && bdiv.style.display == "none") {
+                targetDiv.style.display = "block";
+            }
+            else {
+                targetDiv.style.display = "none";
+            }
+        };  
+    </script>
+
+    <script>
+        const tarDiv = document.getElementById("delevent")
+        const adiv = document.getElementById("eventname")
+        const btn1 = document.getElementById("delbtn")
+        btn1.onclick = function () {
+            if (tarDiv.style.display == "none" && adiv.style.display == "none") {
+                tarDiv.style.display = "flex";
+            }
+            else {
+                tarDiv.style.display = "none";
+            }
+        };  
+    </script>
+    <script type="text/javascript" src="{{ url_for('static',filename='app.js') }}"></script>
+</body>
+
+</html>
